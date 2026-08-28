@@ -63,7 +63,7 @@ export default async function JournalPage() {
                   <div className="flex items-center gap-3 text-[11px] text-mande-gold uppercase tracking-widest font-sans mb-2 font-semibold">
                     <span>À la Une</span>
                     <span>&bull;</span>
-                    <span className="text-gray-400 font-normal">{formatDate(featuredArticle.publishedAt)}</span>
+                    <span className="text-gray-400 font-normal">{formatDate(featuredArticle.publishedAt || featuredArticle.createdAt)}</span>
                   </div>
 
                   <h2 className="font-serif text-2xl sm:text-3xl font-bold uppercase tracking-wider text-mande-black group-hover:text-mande-earth transition-colors leading-tight">
@@ -110,7 +110,7 @@ export default async function JournalPage() {
                       />
                     </div>
                     <div className="text-[10px] text-gray-400 uppercase tracking-widest font-sans mb-1">
-                      {formatDate(art.publishedAt)} &bull; {art.author}
+                      {formatDate(art.publishedAt || art.createdAt)} &bull; {art.author}
                     </div>
                     <h4 className="font-serif text-lg font-bold text-mande-black group-hover:text-mande-earth transition-colors line-clamp-2">
                       {art.title}

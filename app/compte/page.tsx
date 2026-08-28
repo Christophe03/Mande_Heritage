@@ -182,8 +182,8 @@ export default async function ComptePage() {
 
                     <div className="text-xs text-gray-600 font-sans space-y-1">
                       <p>
-                        <strong>{order.items.length} article(s) :</strong>{' '}
-                        {order.items.map((i) => i.product?.name).filter(Boolean).join(', ')}
+                        <strong>{(order.items || []).length} article(s) :</strong>{' '}
+                        {(order.items || []).map((i: any) => i.product?.name).filter(Boolean).join(', ')}
                       </p>
                     </div>
 

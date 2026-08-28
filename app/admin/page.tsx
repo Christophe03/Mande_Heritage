@@ -30,7 +30,7 @@ export default async function AdminDashboardPage() {
   });
 
   const orders = await prisma.order.findMany();
-  const totalRevenue = orders.reduce((sum, o) => sum + o.total, 0);
+  const totalRevenue = orders.reduce((sum: number, o: any) => sum + (o.total || 0), 0);
 
   const totalClients = await prisma.user.count({
     where: { role: 'CLIENT' },

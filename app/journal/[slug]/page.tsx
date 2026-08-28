@@ -81,7 +81,7 @@ export default async function SingleArticlePage({ params }: ArticlePageProps) {
           <div className="flex items-center justify-center gap-3 text-xs text-gray-500 font-sans">
             <span>Par <strong className="text-mande-black">{article.author}</strong></span>
             <span>&bull;</span>
-            <span>{formatDate(article.publishedAt)}</span>
+            <span>{formatDate(article.publishedAt || article.createdAt)}</span>
           </div>
 
           <BogolanDivider variant="gold" className="my-4" />

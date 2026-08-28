@@ -116,7 +116,7 @@ export default async function MesCommandesPage() {
                           </div>
                         </div>
                         <span className="font-serif font-bold text-xs text-mande-black">
-                          {formatPrice(item.unitPrice * item.quantity)}
+                          {formatPrice((item.unitPrice || item.price || 0) * item.quantity)}
                         </span>
                       </div>
                     );

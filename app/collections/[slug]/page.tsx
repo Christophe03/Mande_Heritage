@@ -74,14 +74,14 @@ export default async function SingleCollectionPage({ params }: CollectionPagePro
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="flex items-center justify-between pb-6 mb-8 border-b border-mande-ivoryDark">
           <h2 className="font-serif text-xl font-bold uppercase tracking-wider text-mande-black">
-            Les Pièces de la Collection ({collection.products.length})
+            Les Pièces de la Collection ({(collection.products || []).length})
           </h2>
           <Link href="/boutique" className="text-xs uppercase tracking-wider text-mande-gold hover:underline font-sans">
             Voir toute la boutique →
           </Link>
         </div>
 
-        {collection.products.length === 0 ? (
+        {(collection.products || []).length === 0 ? (
           <div className="text-center py-16 bg-white border border-mande-ivoryDark p-8">
             <h3 className="font-serif text-lg font-bold mb-2">Pièces en cours de confection</h3>
             <p className="text-xs text-gray-500 font-sans">
@@ -90,7 +90,7 @@ export default async function SingleCollectionPage({ params }: CollectionPagePro
           </div>
         ) : (
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-            {collection.products.map((product) => (
+            {(collection.products || []).map((product: any) => (
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
