@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 120" width="100%" height="100%">
+  <!-- Left Emblem / Royal Bogolan Monogram -->
+  <g transform="translate(15, 10)">
+    <!-- Outer Diamond Frame -->
+    <polygon points="50,5 95,50 50,95 5,50" fill="none" stroke="#0B0B0B" stroke-width="2.5"/>
+    <polygon points="50,15 85,50 50,85 15,50" fill="none" stroke="#7A4B24" stroke-width="1" stroke-dasharray="3,3"/>
+    
+    <!-- Central Bogolan Cross -->
+    <polygon points="50,30 70,50 50,70 30,50" fill="#0B0B0B"/>
+    <circle cx="50" cy="50" r="4" fill="#F7F4ED"/>
+    
+    <!-- Cardinal Dots -->
+    <circle cx="50" cy="22" r="2.5" fill="#7A4B24"/>
+    <circle cx="50" cy="78" r="2.5" fill="#7A4B24"/>
+    <circle cx="22" cy="50" r="2.5" fill="#7A4B24"/>
+    <circle cx="78" cy="50" r="2.5" fill="#7A4B24"/>
+  </g>
+
+  <!-- Typography: MANDÉ HÉRITAGE -->
+  <g transform="translate(130, 20)">
+    <!-- Brand Title -->
+    <text x="0" y="48" font-family="'Playfair Display', Georgia, serif" font-size="36" font-weight="700" letter-spacing="6" fill="#0B0B0B">
+      MANDÉ
+    </text>
+    <text x="175" y="48" font-family="'Playfair Display', Georgia, serif" font-size="36" font-weight="400" letter-spacing="6" fill="#0B0B0B">
+      HÉRITAGE
+    </text>
+
+    <!-- Thin Divider with Center Diamond -->
+    <line x1="0" y1="62" x2="160" y2="62" stroke="#7A4B24" stroke-width="0.8" opacity="0.6"/>
+    <polygon points="175,59 179,62 175,65 171,62" fill="#7A4B24"/>
+    <line x1="190" y1="62" x2="350" y2="62" stroke="#7A4B24" stroke-width="0.8" opacity="0.6"/>
+
+    <!-- Baseline Subtitle -->
+    <text x="175" y="78" font-family="'Inter', sans-serif" font-size="9" font-weight="600" letter-spacing="6" fill="#7A4B24" text-anchor="middle">
+      MAISON DE HAUTE CONFECTION AFRICAINE
+    </text>
+  </g>
+</svg>

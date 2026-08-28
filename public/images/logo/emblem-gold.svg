@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+  <defs>
+    <linearGradient id="goldGradEmblem" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F2DFAB"/>
+      <stop offset="50%" stop-color="#C9A24A"/>
+      <stop offset="100%" stop-color="#8A6623"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="100" height="100" fill="#0B0B0B" rx="12"/>
+
+  <!-- Outer Diamond -->
+  <polygon points="50,10 90,50 50,90 10,50" fill="none" stroke="url(#goldGradEmblem)" stroke-width="2.5"/>
+  <polygon points="50,18 82,50 50,82 18,50" fill="none" stroke="url(#goldGradEmblem)" stroke-width="1" stroke-dasharray="2,2"/>
+  
+  <!-- Central Solar Bogolan Motif -->
+  <polygon points="50,30 70,50 50,70 30,50" fill="url(#goldGradEmblem)"/>
+  <circle cx="50" cy="50" r="4.5" fill="#0B0B0B"/>
+  
+  <!-- Monogram Letters M H -->
+  <text x="50" y="54" font-family="'Playfair Display', serif" font-size="11" font-weight="900" fill="url(#goldGradEmblem)" text-anchor="middle" letter-spacing="1">
+    MH
+  </text>
+  
+  <!-- Cardinal Dots -->
+  <circle cx="50" cy="24" r="2.5" fill="url(#goldGradEmblem)"/>
+  <circle cx="50" cy="76" r="2.5" fill="url(#goldGradEmblem)"/>
+  <circle cx="24" cy="50" r="2.5" fill="url(#goldGradEmblem)"/>
+  <circle cx="76" cy="50" r="2.5" fill="url(#goldGradEmblem)"/>
+</svg>

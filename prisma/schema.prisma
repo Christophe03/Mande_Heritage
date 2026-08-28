@@ -1,0 +1,209 @@
+// Prisma Schema for Mandé Héritage Luxury African Fashion House
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String     @id @default(cuid())
+  name         String
+  email        String     @unique
+  passwordHash String
+  role         String     @default("CLIENT") // CLIENT, ADMIN
+  phone        String?
+  addresses    Address[]
+  orders       Order[]
+  reviews      Review[]
+  wishlist     Wishlist[]
+  cartItems    CartItem[]
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+}
+
+model Address {
+  id         String   @id @default(cuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  fullName   String
+  address    String
+  city       String
+  postalCode String?
+  country    String
+  phone      String?
+  isDefault  Boolean  @default(false)
+  createdAt  DateTime @default(now())
+}
+
+model Category {
+  id          String    @id @default(cuid())
+  name        String
+  slug        String    @unique
+  description String?
+  image       String?
+  products    Product[]
+  createdAt   DateTime  @default(now())
+}
+
+model Collection {
+  id          String    @id @default(cuid())
+  name        String
+  slug        String    @unique
+  description String?
+  coverImage  String?
+  isFeatured  Boolean   @default(false)
+  products    Product[]
+  createdAt   DateTime  @default(now())
+}
+
+model Product {
+  id               String      @id @default(cuid())
+  name             String
+  slug             String      @unique
+  description      String
+  shortDescription String?
+  price            Float
+  originalPrice    Float?
+  categoryId       String
+  category         Category    @relation(fields: [categoryId], references: [id])
+  collectionId     String?
+  collection       Collection? @relation(fields: [collectionId], references: [id])
+  gender           String      @default("UNISEX") // HOMME, FEMME, UNISEX
+  sizes            String      @default("[\"S\",\"M\",\"L\",\"XL\"]") // JSON array
+  colors           String      @default("[\"Bôkôlan Naturel\"]") // JSON array of colors/patterns
+  images           String      @default("[]") // JSON array of image URLs
+  stock            Int         @default(10)
+  materials        String?     // e.g. "100% Coton biologique filé à la main, teint à l'argile naturelle du Niger"
+  careInstructions String?     // e.g. "Nettoyage à sec recommandé ou lavage doux à la main à l'eau froide"
+  isNew            Boolean     @default(true)
+  isFeatured       Boolean     @default(false)
+  orderItems       OrderItem[]
+  cartItems        CartItem[]
+  wishlists        Wishlist[]
+  reviews          Review[]
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
+}
+
+model Order {
+  id              String        @id @default(cuid())
+  orderNumber     String        @unique
+  userId          String?
+  user            User?         @relation(fields: [userId], references: [id], onDelete: SetNull)
+  status          String        @default("NOUVELLE") // NOUVELLE, CONFIRMEE, EN_PREPARATION, EXPEDIEE, LIVREE, ANNULEE
+  paymentStatus   String        @default("PENDING")  // PENDING, PAID, FAILED, REFUNDED
+  paymentMethod   String        // ORANGE_MONEY, WAVE, MOOV, CARD, CASH_ON_DELIVERY
+  subtotal        Float
+  shippingCost    Float         @default(0)
+  discount        Float         @default(0)
+  total           Float
+  shippingAddress String        // JSON string with name, email, phone, address, city, country
+  notes           String?
+  items           OrderItem[]
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+}
+
+model OrderItem {
+  id        String   @id @default(cuid())
+  orderId   String
+  order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId String?
+  product   Product? @relation(fields: [productId], references: [id], onDelete: SetNull)
+  size      String?
+  color     String?
+  quantity  Int      @default(1)
+  unitPrice Float
+}
+
+model CartItem {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  productId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  size      String?
+  color     String?
+  quantity  Int      @default(1)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, productId, size, color])
+}
+
+model Wishlist {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  productId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([userId, productId])
+}
+
+model Review {
+  id         String   @id @default(cuid())
+  productId  String
+  product    Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  rating     Int      @default(5)
+  comment    String
+  isApproved Boolean  @default(true)
+  createdAt  DateTime @default(now())
+}
+
+model PromoCode {
+  id             String       @id @default(cuid())
+  code           String       @unique
+  discountType   String       @default("PERCENTAGE") // PERCENTAGE, FIXED
+  value          Float        // e.g. 15 for 15% or 5000 for 5000 FCFA
+  minOrderAmount Float?       @default(0)
+  startDate      DateTime     @default(now())
+  endDate        DateTime?
+  isActive       Boolean      @default(true)
+  usageCount     Int          @default(0)
+  createdAt      DateTime     @default(now())
+}
+
+model Article {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  summary     String
+  content     String
+  coverImage  String
+  author      String   @default("Maison Mandé Héritage")
+  tags        String   @default("[\"Culture\", \"Bogolan\", \"Artisanat\"]") // JSON array
+  isPublished Boolean  @default(true)
+  publishedAt DateTime @default(now())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model ShippingZone {
+  id            String   @id @default(cuid())
+  zoneName      String   // e.g. "Bamako (Express)", "Mali Régions", "Afrique de l’Ouest", "Diaspora Europe & Monde"
+  countries     String   // e.g. "Mali", "Sénégal, Côte d'Ivoire, Burkina Faso", "France, USA, Canada"
+  estimatedDays String   // e.g. "24h à 48h", "3 à 5 jours", "4 à 7 jours"
+  price         Float    // in FCFA
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+}
+
+model SiteBanner {
+  id         String   @id @default(cuid())
+  title      String
+  subtitle   String?
+  link       String?
+  buttonText String?
+  image      String?
+  placement  String   @default("TOP_HEADER") // TOP_HEADER, HERO_POPUP, BANNER_HOMEPAGE
+  isActive   Boolean  @default(true)
+  createdAt  DateTime @default(now())
+}
