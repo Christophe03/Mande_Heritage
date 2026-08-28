@@ -311,7 +311,7 @@ export function OrdersManagement({ initialOrders, availableProducts = [] }: Orde
 
           <Button
             onClick={handleExportCSV}
-            variant="outline"
+            variant="dark-outline"
             size="sm"
             leftIcon={<Download className="w-4 h-4" />}
             className="text-mande-sand border-mande-surface hover:border-mande-gold hover:text-mande-gold"

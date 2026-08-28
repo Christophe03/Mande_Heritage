@@ -72,7 +72,7 @@ export default async function AdminDashboardPage() {
             </Button>
           </Link>
           <Link href="/admin/produits">
-            <Button variant="outline" size="sm" leftIcon={<PlusCircle className="w-4 h-4" />} className="text-mande-sand border-mande-surface hover:border-mande-gold hover:text-mande-gold">
+            <Button variant="dark-outline" size="sm" leftIcon={<PlusCircle className="w-4 h-4" />} className="text-mande-sand border-mande-surface hover:border-mande-gold hover:text-mande-gold">
               Nouveau Produit
             </Button>
           </Link>

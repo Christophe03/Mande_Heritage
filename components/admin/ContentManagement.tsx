@@ -306,7 +306,7 @@ export function ContentManagement({ initialArticles, initialCollections }: Conte
 
           <Button
             onClick={() => handleOpenCollectionModal()}
-            variant="outline"
+            variant="dark-outline"
             size="md"
             leftIcon={<Plus className="w-4 h-4" />}
             className="text-mande-sand border-mande-surface hover:border-mande-gold hover:text-mande-gold"

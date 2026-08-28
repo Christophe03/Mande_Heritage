@@ -42,7 +42,7 @@ export async function POST(req: NextRequest) {
         author: author || 'Maison Mandé Héritage',
         tags: Array.isArray(tags) ? JSON.stringify(tags) : (tags || '["Bôkôlan", "Haute Couture"]'),
         isPublished: isPublished ?? true,
-        publishedAt: isPublished ? new Date() : null,
+        publishedAt: isPublished ? new Date() : undefined,
       },
     });
 

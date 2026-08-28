@@ -46,9 +46,6 @@ export async function PUT(req: NextRequest) {
       data: {
         name: name || undefined,
         phone: phone !== undefined ? phone : undefined,
-        address: address !== undefined ? address : undefined,
-        city: city !== undefined ? city : undefined,
-        country: country !== undefined ? country : undefined,
       },
     });
 
