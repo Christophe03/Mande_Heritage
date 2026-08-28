@@ -17,7 +17,12 @@ const sansFont = Inter({
   display: 'swap',
 });
 
+const appUrl =
+  process.env.NEXT_PUBLIC_APP_URL ||
+  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'https://mandeheritage.com');
+
 export const metadata: Metadata = {
+  metadataBase: new URL(appUrl.startsWith('http') ? appUrl : `https://${appUrl}`),
   title: 'Mandé Héritage | Maison de Haute Mode Africaine & Bôkôlan',
   description:
     'Maison de mode africaine d’exception. Vêtements, sacs, chaussures et accessoires en Bôkôlan authentique et cotonnade fine tissée main.',
