@@ -19,6 +19,8 @@ import {
 } from 'lucide-react';
 import { AdminNavLinks } from '@/components/admin/AdminNavLinks';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata = {
   title: 'Administration & Back-Office | Mandé Héritage',
   description: 'Tableau de bord de gestion pour la Maison Mandé Héritage.',

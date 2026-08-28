@@ -17,12 +17,23 @@ const sansFont = Inter({
   display: 'swap',
 });
 
-const appUrl =
-  process.env.NEXT_PUBLIC_APP_URL ||
-  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'https://mandeheritage.com');
+function getMetadataBase(): URL {
+  try {
+    const rawUrl = process.env.NEXT_PUBLIC_APP_URL || process.env.VERCEL_URL;
+    if (rawUrl && typeof rawUrl === 'string' && rawUrl.trim() !== '') {
+      const formatted = rawUrl.startsWith('http://') || rawUrl.startsWith('https://')
+        ? rawUrl.trim()
+        : `https://${rawUrl.trim()}`;
+      return new URL(formatted);
+    }
+  } catch (e) {
+    // fallback safely
+  }
+  return new URL('https://mandeheritage.com');
+}
 
 export const metadata: Metadata = {
-  metadataBase: new URL(appUrl.startsWith('http') ? appUrl : `https://${appUrl}`),
+  metadataBase: getMetadataBase(),
   title: 'Mandé Héritage | Maison de Haute Mode Africaine & Bôkôlan',
   description:
     'Maison de mode africaine d’exception. Vêtements, sacs, chaussures et accessoires en Bôkôlan authentique et cotonnade fine tissée main.',
